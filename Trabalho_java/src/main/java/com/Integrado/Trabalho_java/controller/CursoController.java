@@ -23,7 +23,7 @@ public class CursoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Curso> findById(@PathVariable Integer id) {
+    public ResponseEntity<Curso> findById(@PathVariable Long id) { // Alterado de Integer para Long
         return cursoRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -35,7 +35,7 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Curso> update(@PathVariable Integer id, @Valid @RequestBody Curso curso) {
+    public ResponseEntity<Curso> update(@PathVariable Long id, @Valid @RequestBody Curso curso) { // Alterado de Integer para Long
         if (!cursoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -44,7 +44,7 @@ public class CursoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) { // Alterado de Integer para Long
         if (!cursoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

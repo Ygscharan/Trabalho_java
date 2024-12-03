@@ -1,9 +1,7 @@
 package com.Integrado.Trabalho_java.model;
 
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "turmas")
@@ -11,41 +9,46 @@ public class Turma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private Integer ano;
 
-    @NotNull
-    @Min(1)
-    @Max(2)
+    @Column(nullable = false)
     private Integer semestre;
 
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
-    public Integer getId() {
+    public Turma(Long id, Integer ano, Integer semestre, Curso curso) {
+        this.id = id;
+        this.ano = ano;
+        this.semestre = semestre;
+        this.curso = curso;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public @NotNull Integer getAno() {
+    public Integer getAno() {
         return ano;
     }
 
-    public void setAno(@NotNull Integer ano) {
+    public void setAno(Integer ano) {
         this.ano = ano;
     }
 
-    public @NotNull @Min(1) @Max(2) Integer getSemestre() {
+    public Integer getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(@NotNull @Min(1) @Max(2) Integer semestre) {
+    public void setSemestre(Integer semestre) {
         this.semestre = semestre;
     }
 
@@ -56,4 +59,6 @@ public class Turma {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
+
+
 }

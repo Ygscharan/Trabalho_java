@@ -33,14 +33,14 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno aluno) {
+    public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
         return alunoRepository.findById(id)
-                .map(existingAluno -> {
-                    existingAluno.setNome(aluno.getNome());
-                    existingAluno.setEmail(aluno.getEmail());
-                    existingAluno.setDataNascimento(aluno.getDataNascimento());
-                    alunoRepository.save(existingAluno);
-                    return ResponseEntity.ok(existingAluno);
+                .map(aluno -> {
+                    aluno.setNome(alunoAtualizado.getNome());
+                    aluno.setEmail(alunoAtualizado.getEmail());
+                    aluno.setMatricula(alunoAtualizado.getMatricula());
+                    aluno.setDataNascimento(alunoAtualizado.getDataNascimento());
+                    return ResponseEntity.ok(alunoRepository.save(aluno));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -53,5 +53,5 @@ public class AlunoController {
         }
         return ResponseEntity.notFound().build();
     }
-}
 
+}

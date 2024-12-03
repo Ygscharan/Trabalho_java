@@ -1,11 +1,10 @@
 package com.Integrado.Trabalho_java.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "aluno")
+@Table(name = "alunos")
 public class Aluno {
 
     @Id
@@ -15,8 +14,11 @@ public class Aluno {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String email;
+
+    @Column(nullable = false, length = 20, unique = true)
+    private String matricula;
 
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
@@ -45,11 +47,27 @@ public class Aluno {
         this.email = email;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Aluno(Long id, String nome, String email, String matricula, LocalDate dataNascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.matricula = matricula;
         this.dataNascimento = dataNascimento;
     }
 }

@@ -1,8 +1,6 @@
 package com.Integrado.Trabalho_java.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "cursos")
@@ -10,49 +8,46 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @NotNull
-    @Size(max = 100)
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    @NotNull
-    @Size(max = 20)
-    @Column(unique = true)
+    @Column(nullable = false, length = 20, unique = true)
     private String codigo;
 
-    @NotNull
+    @Column(nullable = false)
     private Integer cargaHoraria;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public @NotNull @Size(max = 100) String getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(@NotNull @Size(max = 100) String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public @NotNull @Size(max = 20) String getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(@NotNull @Size(max = 20) String codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-    public @NotNull Integer getCargaHoraria() {
+    public Integer getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(@NotNull Integer cargaHoraria) {
+    public void setCargaHoraria(Integer cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 }

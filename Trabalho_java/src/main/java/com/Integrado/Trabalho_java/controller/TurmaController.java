@@ -23,25 +23,28 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Turma> findById(@PathVariable Integer id) {
+    public ResponseEntity<Turma> findById(@PathVariable Long id) { // Alterado de Integer para Long
         return turmaRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @PostMapping
     public ResponseEntity<Turma> save(@Valid @RequestBody Turma turma) {
         return ResponseEntity.status(HttpStatus.CREATED).body(turmaRepository.save(turma));
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Turma> update(@PathVariable Integer id, @Valid @RequestBody Turma turma) {
+    public ResponseEntity<Turma> update(@PathVariable Long id, @Valid @RequestBody Turma turma) { // Alterado de Integer para Long
         if (!turmaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         turma.setId(id);
         return ResponseEntity.ok(turmaRepository.save(turma));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) { // Alterado de Integer para Long
         if (!turmaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
