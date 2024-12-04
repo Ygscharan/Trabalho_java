@@ -1,6 +1,8 @@
 package com.Integrado.Trabalho_java.controller;
 
+import com.Integrado.Trabalho_java.model.Aluno;
 import com.Integrado.Trabalho_java.model.Turma;
+import com.Integrado.Trabalho_java.repository.AlunoRepository;
 import com.Integrado.Trabalho_java.repository.TurmaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,16 @@ public class TurmaController {
     @Autowired
     private TurmaRepository turmaRepository;
 
+    @Autowired
+    private AlunoRepository alunoRepository;
+
     @GetMapping
     public List<Turma> findAll() {
         return turmaRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Turma> findById(@PathVariable Long id) { // Alterado de Integer para Long
+    public ResponseEntity<Turma> findById(@PathVariable Long id) {
         return turmaRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -35,7 +40,7 @@ public class TurmaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Turma> update(@PathVariable Long id, @Valid @RequestBody Turma turma) { // Alterado de Integer para Long
+    public ResponseEntity<Turma> update(@PathVariable Long id, @Valid @RequestBody Turma turma) {
         if (!turmaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -44,11 +49,16 @@ public class TurmaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) { // Alterado de Integer para Long
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!turmaRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         turmaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/alunos")
+    public List<Aluno> getAlunosByTurma(@PathVariable Long id) {
+        return alunoRepository.findAlunosByTurmaId(id);
     }
 }

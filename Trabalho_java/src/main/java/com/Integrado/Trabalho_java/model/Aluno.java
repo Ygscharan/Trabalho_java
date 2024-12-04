@@ -2,6 +2,7 @@ package com.Integrado.Trabalho_java.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "alunos")
@@ -22,6 +23,9 @@ public class Aluno {
 
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Matricula> matriculas; // Relacionamento com a classe Matricula
 
     public Long getId() {
         return id;
@@ -63,6 +67,14 @@ public class Aluno {
         this.dataNascimento = dataNascimento;
     }
 
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
+    }
+
     public Aluno(Long id, String nome, String email, String matricula, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
@@ -71,4 +83,3 @@ public class Aluno {
         this.dataNascimento = dataNascimento;
     }
 }
-
