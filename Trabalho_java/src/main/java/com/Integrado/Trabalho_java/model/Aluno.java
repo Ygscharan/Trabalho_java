@@ -25,8 +25,7 @@ public class Aluno {
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "aluno")
-    private List<Matricula> matriculas; // Relacionamento com a classe Matricula
-
+    private List<Matricula> matriculas;
     public Long getId() {
         return id;
     }
